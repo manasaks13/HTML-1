@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+    <h1>Exam Pass/Fail Predictor!</h1>
+    <input type="text" name="" id="name" placeholder="Enter your name:">
+    <p id="result"></p>
+    <button onclick="exam()">result</button>
+    </div>
+    <script>
+        function exam(){
+            var name= document.getElementById("name").value;
+            var marks= Math.floor(Math.random()*101);
+            var resultText="";
+            var resultClass="";
+
+            if(marks < 35){
+                resultText=name + " has failed!";
+                resultClass="fail";
+            }else{
+                resultClass="pass";
+                if(marks >= 75){
+                    resultText= name + " has passed with Distinction!";
+                }
+                else if(marks >= 60){
+                    resultText=name + " has passed with First Class";
+                }
+                else if(marks >= 50){
+                    resultText=name + " has passed with Second Class";
+                }
+                else{
+                    resultText=name + " has passed(Just passed)"
+                }
+            }
+        var resultPara=document.getElementById("result");
+        resultPara.innerHTML=resultText;
+        resultPara.className=resultClass;
+        }
+    </script>
+    <style>
+        .div{
+            height: 100px;
+            width: 100px;
+            border: 2px solid black;
+            padding: 5px;
+            margin: 5px;
+            text-align: center;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            display: flex;
+        }
+
+        .box{
+            height: 300px ;
+            width: 600px;
+            padding: 5px;
+            margin: 5px;
+            background-color: burlywood;
+            color: black;
+            text-align: center;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            border-radius: 30%;
+            box-shadow: 0px 5px 20px burlywood;
+        }
+
+        body{
+            background-color: brown;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .fail{
+            color: red;
+        }
+
+        .pass{
+            color: green;
+        }
+    </style>
+</body>
+</html>

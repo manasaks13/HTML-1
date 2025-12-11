@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+    <h1>LOVE PREDICTOR!</h1>
+    <input type="text" name="" id="name1" placeholder="Enter name of Person1:">
+    <input type="text" name="" id="name2" placeholder="Enter name of Person2:">
+    <p id="Result"></p>
+    <button onclick="match()">Result</button>
+    </div>
+    <script>
+        function match(){
+            var name1= document.getElementById("name1").value;
+            var name2= document.getElementById("name2").value;
+            var points= Math.floor(Math.random()*101);
+            var resultText="";
+            var resultClass="";
+
+            if(points >= 75){
+                resultText= " You Have Excellent Compatibility!🤩 ";
+            }
+            else if(points >= 60){
+                resultText=  " You Have Average Compatibility!😊 ";
+            }
+            else if(points >= 50){
+                resultText=" You Have Weak Compatibility!😐 ";
+            }
+            else{
+                resultText= " You Have No Compatibility!😑 ";
+            }
+        var resultPara=document.getElementById("Result");
+        resultPara.innerHTML=resultText;
+        resultPara.className=resultClass;
+        }
+    </script>
+    <style>
+        body{
+            background-image: url("https://www.shutterstock.com/image-vector/love-meter-heart-symbol-isolated-260nw-2576787469.jpg");
+            background-size:cover;
+            margin: 0px;
+            padding: 0%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            text-align: center;
+        }
+        div{
+            width: 500px;
+            height: 250px;
+            backdrop-filter: blur(10px);
+            background-position: center;
+            border: 1px solid whitesmoke;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            align-content: center;
+            border-radius: 10%;
+            box-shadow: 0px 0px 20px peachpuff;
+        }
+        button{
+            background-color: pink;
+        }
+    </style>
+</body>
+</html>

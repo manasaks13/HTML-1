@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird Simple</title>
+
+<style>
+    body{
+        margin: 0;
+        overflow: hidden;
+        background: linear-gradient(to top, white, skyblue);
+        height: 100vh;
+        text-align: center;
+    }
+    #bird{
+        position: absolute;
+        left: 100px;
+        top: 200px;
+        font-size: 70px;
+    }
+    #scorebox{
+        margin: 10px;
+        font-style: oblique;
+        font-size: 25px;
+    }
+    .pipe{
+        position: absolute;
+        width: 70px;
+        background: brown;
+    }
+</style>
+
+</head>
+<body>
+
+    <p id="scorebox">Score:0</p>
+    <div id="bird">🐦</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    let bird = $("#bird");
+    let birdY = 200;
+
+    let gravity = 3;
+    let score = 0;
+
+    function createPipe() {
+        let gap = 140;
+        let pipeTopHeight = Math.random() * 250 + 50;
+        let pipeBottomHeight = 600 - pipeTopHeight - gap;
+
+        let pipeTop = $("<div class='pipe'></div>");
+        pipeTop.css({
+            left: "100%",
+            top: 0,
+            height: pipeTopHeight
+        });
+
+        let pipeBottom = $("<div class='pipe'></div>");
+        pipeBottom.css({
+            left: "100%",
+            top: pipeTopHeight + gap,
+            height: pipeBottomHeight
+        });
+
+        $("body").append(pipeTop, pipeBottom);
+
+        pipeTop.animate({ left: "-100px" }, 3000, function () {
+            $(this).remove();
+            score++;
+            $("#scorebox").text("Score: " + score);
+        });
+
+        pipeBottom.animate({ left: "-100px" }, 3000, function () {
+            $(this).remove();
+        });
+
+        let checkCollision = setInterval(function () {
+            let birdPos = bird[0].getBoundingClientRect();
+            let topPos = pipeTop[0].getBoundingClientRect();
+            let bottomPos = pipeBottom[0].getBoundingClientRect();
+
+            if (
+                (birdPos.left < topPos.right &&
+                    birdPos.right > topPos.left &&
+                    birdPos.top < topPos.bottom) ||
+
+                (birdPos.left < bottomPos.right &&
+                    birdPos.right > bottomPos.left &&
+                    birdPos.bottom > bottomPos.top)
+            ) {
+                alert("Game Over!");
+                location.reload();
+            }
+        }, 30);
+    }
+
+    // Bird falling by gravity
+    setInterval(function () {
+        birdY += gravity;
+        bird.css("top", birdY + "px");
+
+        if (birdY > $(window).height()) {
+            alert("Bird fell! Game Over!");
+            location.reload();
+        }
+    }, 30);
+
+    // Jump on space key
+    $(document).keydown(function (e) {
+        if (e.key === " ") {
+            birdY -= 50;
+        }
+    });
+
+    // Generate pipes
+    setInterval(createPipe, 2500);
+</script>
+
+</body>
+</html>
