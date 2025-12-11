@@ -44,6 +44,18 @@
             color: white;
         }
     </style>
-    <script src="vote.js"></script>
+    <script>
+        function vote(){
+    var name=document.getElementById("name").value;
+    var age=document.getElementById("age").value;
+    if(age>18){
+        alert('Eligible to vote');
+        par.innerHTML="You are an adult👍"
+    }else{
+        alert('Not eligible to vote');
+        par.innerHTML="You are a child😂"
+    }
+}
+    </script>
 </body>
 </html>
